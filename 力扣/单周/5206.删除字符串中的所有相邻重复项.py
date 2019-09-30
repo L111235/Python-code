@@ -4,20 +4,44 @@ k = 3
 i=0
 n=len(s)
 while(i+k<=n):
-	if s[i:i+k]==s[i]*k:
+    '''if s[i:i+k]==s[i]*k:
 
-		#1.采用切片结合字符串的乘法来进行对比处理
-		#2.或者将字符逐个对比，累计相同字符的个数然后与k对比
-		#3.或者将字符逐个添加到一个list中，进行set处理，看
-		#处理之后长度是否为1
-		#后面两种方法花费时间比第一种方法更长
-		
-		s=s[:i]+s[i+k:]
-		n=n-k
-		if i-k>0:
-			i-=k
-		else:
-			i=0
-	else:
-		i+=1
+        #1.采用切片结合字符串的乘法来进行对比处理
+        #2.或者将字符逐个对比，累计相同字符的个数然后与k对比
+        #3.或者将字符逐个添加到一个list中，进行set处理，看
+        #处理之后长度是否为1
+        #后面两种方法花费时间比第一种方法更长
+        
+        s=s[:i]+s[i+k:]
+        n=n-k
+        if i-k>0:
+            i-=k
+        else:
+            i=0
+    '''
+
+    count = 1
+    preI = i
+    while count < k and s[preI] == s[preI + 1]:
+        count += 1
+        preI += 1
+    '''
+    count=0
+    for j in range(i,i+k-1):
+        if s[j+1]==s[j]:
+            count+=1
+        else:
+            break
+        if j==i+k-2:
+            count+=1
+    '''
+    if count==k:
+        s=s[:i]+s[i+k:]
+        n=n-k
+        if i-k>=0:
+            i=i-k
+        else:
+            i=0
+    else:
+        i+=1
 print(s)
